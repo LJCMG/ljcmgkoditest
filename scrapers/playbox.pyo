@@ -1,40 +1,0 @@
-Û
-˚èYc           @   s¡   d  Z  d d l Z d d l Z d d l Z d d l Z d d l Z d d l Z d d l Z d d l m	 Z	 d d l m
- Z
- d d l m Z d d l m Z d d l m Z d d
- d	 Ñ  É  YZ d S(   s¢  
-    Covenant Add-on
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-iˇˇˇˇN(   t
-   cleantitle(   t   client(   t   source_utils(   t   directstream(   t   pyaest   sourcec           B   sG   e  Z d  Ñ  Z d Ñ  Z d Ñ  Z d Ñ  Z d Ñ  Z d Ñ  Z d Ñ  Z RS(   c         C   sI   d |  _  d g |  _ d g |  _ d |  _ d |  _ d |  _ d |  _ d  S(   Ni    t   ens   playboxhd.coms   http://playboxhd.coms6   /api/box?type=search&os=Android&v=291.0&k=0&keyword=%ss8   /api/box?type=detail&id=%s&os=Android&v=291.0&k=0&al=keys-   /api/box?type=stream&id=%s&os=Android&v=291.0(   t   priorityt   languaget   domainst	   base_linkt   search_linkt   sources_linkt   stream_link(   t   self(    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyt   __init__   s    				c         C   sA   y2 i | d 6| d 6| d 6} t  j | É } | SWn d  SXd  S(   Nt   imdbt   titlet   year(   t   urllibt	   urlencodet   None(   R   R   R   t
-   localtitlet   aliasesR   t   url(    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyt   movie(   s    c         C   sH   y9 i | d 6| d 6| d 6| d 6} t  j | É } | SWn d  SXd  S(   NR   t   tvdbt   tvshowtitleR   (   R   R   (   R   R   R   R   t   localtvshowtitleR   R   R   (    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyt   tvshow0   s    "c   	      C   s∂   yß | d  k r d  St j | É } t g  | D]0 } | | rP | | | d f n	 | d f ^ q, É } | | | | f \ | d <| d <| d <| d <t j | É } | SWn d  SXd  S(   Ni    t    R   t   seasont   episodet	   premiered(   R   t   urlparset   parse_qst   dictR   R   (	   R   R   R   R   R   R!   R   R    t   i(    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyR    8   s     C.c      	      s%  g  } y| d  k r | St j | É } t g  | D]0 â  | à  rV à  | à  d f n	 à  d f ^ q2 É } d | k rÅ | d n | d } |  j t j | É } t j |  j | É } t	 j
- | d t d d d d	 É} t j | d É }	 |	 d
- d }	 t | d É t t | d É d É t t | d É d É g }
- d | k r£g  |	 D]. â  t j | É t j à  d É k rLà  ^ qL}	 g  |	 D]+ â  à  t j d d t à  d É É f ^ qá}	 g  |	 D], â  t á  f d Ü  |
- DÉ É røà  d ^ qød }	 t	 j
- t j |  j |  j |	 d É d t d | d d d	 É} t j | d É }	 g  |	 d
- d D]@ â  à  d j d d É j É  d | d | d f k rVà  ^ qVd }	 nÿ g  |	 D]. â  t j | É t j à  d É k r™à  ^ q™}	 g  |	 D]( â  t á  f d Ü  |
- DÉ É rÂà  ^ qÂd }	 t	 j
- t j |  j |  j |	 d É d t d | d d d	 É} t j | d É }	 |	 d
- d d }	 t	 j
- t j |  j |  j |	 d É d t d | d d d	 É} t j | d É }	 g  |	 d
- D]* â  à  d à  d |  j à  d É f ^ qÿ}	 g  } xÙ |	 D]Ï â  y‹ t j à  d | É \ } } | sFwn  t j à  d | É \ } } } xé | D]Ü } | d k rà| d n t j à  d É } | d k r±| d n à  d } | j i | d  6| d 6d! d" 6| d 6| d# 6t d$ 6É qlWWqqXqW| SWn t  k
- r } | SXd  S(%   Ni    R   R   R   t   mobilet   timeouti   t   outputt   extendedt   datat   filmsR   i   R    s   [^0-9]t   publishDatec         3   s   |  ] } | à  d  k Vq d S(   i   N(    (   t   .0t   x(   R%   (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pys	   <genexpr>W   s    t   idt   headersi   t   chapterst   0s   s%se%sR   c         3   s   |  ] } | à  d  k Vq d S(   R,   N(    (   R-   R.   (   R%   (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pys	   <genexpr>^   s    t   qualityt   servert   streami   t   gvideoR   R   R   R   t   directt
-   debridonly(!   R   R"   R#   R$   R   R   t
-   quote_plust   urljoinR
-   R   t   requestt   Truet   jsont   loadst   strt   intR    t   gett   ret   subt   anyR   t   replacet   lowerR   t   _decryptR   t   is_host_validt   check_directstreamst   label_to_qualityt   appendt   Falset	   Exception(   R   R   t   hostDictt   locDictt   sourcesR*   R   t   queryt   resultt   rt   yearst   validt   hostert   urlst   hostR7   R.   t   qt   ut   e(    (   R%   s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyRP   C   sZ     C !A;8=?\;9?,; ) ?c         C   s!   d | k r t  j | É S| Sd  S(   Nt   google(   R   t
-   googlepass(   R   R   (    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyt   resolve{   s    c         C   s\   d d  l  } t j t j | j d É d É É } | j | É } | j | É | j É  } | S(   Niˇˇˇˇs,   cXdlcnR5dWlvcGFzZGZnaGprbHp4YzEyMzQ1Njc4OTA=s    i   s                   (   t   base64R   t	   Decryptert   AESModeOfOperationCBCt   urlsafe_b64decodet   decodestringt   feed(   R   R   R_   t	   decrypter(    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyRG   Å   s
-    $(	   t   __name__t
-   __module__R   R   R   R    RP   R^   RG   (    (    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyR      s   						8	(    (   t   __doc__RB   R   R"   t   randomt   hashlibt   stringR=   t   resources.lib.modulesR    R   R   R   R   R   (    (    (    s^   C:\Users\samue\AppData\Roaming\Kodi\addons\plugin.video.salts\scrapers\playbox.pyt   <module>   s   0$

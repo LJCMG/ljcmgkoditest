@@ -3,7 +3,7 @@
 # Addon Provider: MR Blamo
 msgid ""
 msgstr ""
-"Project-Id-Version: TV Addons Addons\n"
+"Project-Id-Version: Death Streams\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: English\n"

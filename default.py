@@ -88,7 +88,7 @@ def settings_menu():
     kodi.create_item({'mode': MODES.REPAIR_URLRESOLVER}, i18n('repair_urlresolver'), thumb=utils2.art('settings.png'), fanart=utils2.art('fanart.jpg'))
     kodi.create_item({'mode': MODES.SHOW_VIEWS}, i18n('set_default_views'), thumb=utils2.art('settings.png'), fanart=utils2.art('fanart.jpg'))
     kodi.create_item({'mode': MODES.BROWSE_URLS}, i18n('remove_cached_urls'), thumb=utils2.art('settings.png'), fanart=utils2.art('fanart.jpg'))
-    kodi.create_item({'mode': MODES.SETTINGS}, 'This addon developed and supported at www.tvaddons.ag', thumb=utils2.art('settings.png'), fanart=utils2.art('fanart.jpg'))
+    kodi.create_item({'mode': MODES.SETTINGS}, 'This addon developed and supported by you know it MR blamo', thumb=utils2.art('settings.png'), fanart=utils2.art('fanart.jpg'))
     kodi.set_content(CONTENT_TYPES.ADDONS)
     kodi.end_of_directory()
 
