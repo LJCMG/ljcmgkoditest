@@ -4,7 +4,7 @@
 - Added Themes
 - Redid Themes added New Images, Redid the Default Theme
 - Added all New Backgrounds
-- Scrapers Fixed Mehlizmovies, losmovies pelispedia, mintmovies, ddlvalley, seriesonline
+- Scrapers Fixed Mehlizmovies, losmovies, pelispedia, mintmovies, ddlvalley, seriesonline
 
 [B]Version 2.3.0[/B]
 - Minor bug fixes
