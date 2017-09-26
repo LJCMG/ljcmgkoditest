@@ -29,7 +29,7 @@ from salts_lib.constants import VIDEO_TYPES
 from salts_lib.utils2 import i18n
 import scraper
 
-BASE_URL = 'https://www.ddlvalley.cool'
+BASE_URL = 'https://www.ddlvalley.me'
 CATEGORIES = {VIDEO_TYPES.MOVIE: '/category/movies/', VIDEO_TYPES.TVSHOW: '/category/tv-shows/'}
 LOCAL_UA = 'Death Streams for Kodi/%s' % (kodi.get_version())
 
