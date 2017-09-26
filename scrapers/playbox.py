@@ -18,13 +18,16 @@
 '''
 
 
-import re,urllib,urlparse,random
-import hashlib, string, json
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import source_utils
-from resources.lib.modules import directstream
-from resources.lib.modules import pyaes as pyaes
+import re
+import urlparse
+import log_utils  # @UnusedImport
+import kodi
+import dom_parser2
+from salts_lib import scraper_utils
+from salts_lib.constants import FORCE_NO_MATCH
+from salts_lib.constants import QUALITIES
+from salts_lib.constants import VIDEO_TYPES
+import scraper
 
 
 class source:
