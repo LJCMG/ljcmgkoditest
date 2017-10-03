@@ -9,8 +9,6 @@
         <import addon="script.module.deathstreams"/>
         <import addon="script.module.six"/>
         <import addon="script.module.dateutil"/>
-
-        <import addon="script.module.image_cache" optional="true" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
