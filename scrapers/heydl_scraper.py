@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr. Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import VIDEO_TYPES
 import scraper
 
-BASE_URL = 'http://heydl.ga'
-MOVIE_URL = 'https://heydl.org'
+BASE_URL = 'https://heydl.org/'
+MOVIE_URL = 'https://heydl.org/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
