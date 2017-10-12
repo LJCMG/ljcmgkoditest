@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,12 +26,7 @@ from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import FORCE_NO_MATCH
 from salts_lib.constants import QUALITIES
 
-BASE_URL = 'http://kodimadman.site88.net'
-XML_META = {
-    '4kmovies.xml': {'quality': QUALITIES.HD1080, 'format': '4K'},
-    '3dmovies.xml': {'quality': QUALITIES.HD1080, '3D': True},
-    'oldskoolmovies.xml': {'quality': QUALITIES.HD720}
-}
+BASE_URL = 'http://dl.dlfile.pro/1/'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
@@ -42,60 +37,74 @@ class Scraper(scraper.Scraper):
 
     @classmethod
     def provides(cls):
-        return frozenset([VIDEO_TYPES.MOVIE])
+        return frozenset([VIDEO_TYPES.MOVIE, VIDEO_TYPES.TVSHOW, VIDEO_TYPES.EPISODE])
 
     @classmethod
     def get_name(cls):
-        return 'RealMovies'
+        return 'MkvWatch'
 
     def get_sources(self, video):
         hosters = []
         source_url = self.get_url(video)
         if not source_url or source_url == FORCE_NO_MATCH: return hosters
-        query = scraper_utils.parse_query(source_url)
-        if 'link' in query:
-            stream_url = query['link']
-            host = urlparse.urlparse(stream_url).hostname
-            if 'xml_file' in query:
-                xml_meta = XML_META.get(query['xml_file'], {})
-            else:
-                xml_meta = {}
-
-            quality = xml_meta.get('quality', QUALITIES.HD1080)
-            source = {'multi-part': False, 'url': stream_url, 'host': host, 'class': self, 'quality': quality, 'views': None, 'rating': None, 'direct': False}
-            if 'quality' in xml_meta: del xml_meta['quality']
-            source.update(xml_meta)
-            hosters.append(source)
+        headers = {'User-Agent': scraper_utils.get_ua(), 'Referer': self.base_url + source_url}
+        if video.video_type == VIDEO_TYPES.MOVIE:
+            meta = scraper_utils.parse_movie_link(source_url)
+            stream_url = source_url + scraper_utils.append_headers(headers)
+            quality = scraper_utils.height_get_quality(meta['height'])
+            hoster = {'multi-part': False, 'host': scraper_utils.get_direct_hostname(self, stream_url), 'class': self, 'quality': quality, 'views': None, 'rating': None, 'url': stream_url, 'direct': True}
+            if 'format' in meta: hoster['format'] = meta['format']
+            hosters.append(hoster)
+        else:
+            for episode in self.__match_episode(source_url, video):
+                meta = scraper_utils.parse_episode_link(episode['title'])
+                stream_url = episode['url'] + scraper_utils.append_headers(headers)
+                stream_url = stream_url.replace(self.base_url, '')
+                quality = scraper_utils.height_get_quality(meta['height'])
+                hoster = {'multi-part': False, 'host': scraper_utils.get_direct_hostname(self, stream_url), 'class': self, 'quality': quality, 'views': None, 'rating': None, 'url': stream_url, 'direct': True}
+                if 'format' in meta: hoster['format'] = meta['format']
+                if 'size' in episode: hoster['size'] = scraper_utils.format_size(int(episode['size']))
+                hosters.append(hoster)
 
         return hosters
 
+    def _get_episode_url(self, show_url, video):
+        force_title = scraper_utils.force_title(video)
+        if not force_title and self.__match_episode(show_url, video):
+            return scraper_utils.pathify_url(show_url)
+
+    def __match_episode(self, show_url, video):
+        episodes = []
+        show_url = self.base_url + show_url
+        for item in scraper_utils.get_files(self, show_url, cache_limit=1):
+            if re.search('[._ -]S%02d[._ -]?E%02d[._ -]' % (int(video.season), int(video.episode)), item['title'], re.I):
+                episodes.append(item)
+        return episodes
+                
     def search(self, video_type, title, year, season=''):  # @UnusedVariable
         results = []
-        folders = ['/addons/real-movies/base.xml']
+        if video_type == VIDEO_TYPES.MOVIE:
+            results = self.__movie_search(title, year)
+        else:
+            norm_title = scraper_utils.normalize_title(title)
+            html = self._http_get(self.base_url, cache_limit=48)
+            for item in scraper_utils.parse_directory(self, html):
+                if norm_title in scraper_utils.normalize_title(item['title']) and item['directory']:
+                    result = {'url': scraper_utils.pathify_url(item['link']), 'title': scraper_utils.cleanse_title(item['title']), 'year': ''}
+                    results.append(result)
+        return results
+    
+    def __movie_search(self, title, year):
+        results = []
         norm_title = scraper_utils.normalize_title(title)
-        for page_url in folders:
-            xml_file = os.path.basename(page_url)
-            page_url = scraper_utils.urljoin(self.base_url, page_url)
-            xml = self._http_get(page_url, require_debrid=False, cache_limit=48)
-            new_folders = re.findall('<folder>(.*?)</folder>', xml, re.I)
-            if new_folders:
-                folders += [folder for folder in new_folders if folder]
-                
-            for match in re.finditer('<item>(.*?)</item>', xml, re.I | re.DOTALL):
-                item = match.group(1)
-                match_title_year = re.search('<title>(.*?)</title>', item, re.I)
-                match_url = re.search('<link>(.*?)</link>', item, re.I)
-                if match_title_year and match_url:
-                    match_title_year = match_title_year.group(1)
-                    match_url = match_url.group(1)
-                    if match_title_year and match_url:
-                        match_title, match_year = scraper_utils.extra_year(match_title_year)
-                        xml_file = xml_file.replace(' ', '').lower()
-                        match_url = 'xml_file=%s&link=%s' % (xml_file, match_url)
-                        if norm_title in scraper_utils.normalize_title(match_title) and (not year or not match_year or year == match_year):
-                            if 'format' in XML_META.get(xml_file, {}):
-                                match_title += ' (%s)' % (XML_META[xml_file]['format'])
-                            result = {'title': scraper_utils.cleanse_title(match_title), 'year': match_year, 'url': match_url}
-                            results.append(result)
-
+        html = self._http_get(self.base_url, cache_limit=48)
+        for item in scraper_utils.parse_directory(self, html):
+            if not item['directory']:
+                meta = scraper_utils.parse_movie_link(item['title'])
+                if meta['dubbed']: continue
+                if (norm_title in scraper_utils.normalize_title(meta['title'])) and (not year or not meta['year'] or year == meta['year']):
+                    match_title = meta['title'].replace('.', ' ')
+                    match_title += ' [%sp.%s]' % (meta['height'], meta['extra'])
+                    result = {'url': scraper_utils.pathify_url(item['link']), 'title': scraper_utils.cleanse_title(match_title), 'year': meta['year']}
+                    results.append(result)
         return results
