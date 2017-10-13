@@ -678,7 +678,7 @@ msgstr "Trakt ovjera završena"
 
 msgctxt "#30174"
 msgid "Enabled"
-msgstr "Omogućeno"
+msgstr "omogućen"
 
 msgctxt "#30175"
 msgid "Base Url"
@@ -946,7 +946,7 @@ msgstr "Nema ograničenja na najveći rezultat Izvora"
 
 msgctxt "#30241"
 msgid "Set Source Sort Keys to default"
-msgstr "Postavi ključ razvrstavanja izvora na zadano"
+msgstr "Postavi pravilo razvrstavanja izvora na zadano"
 
 msgctxt "#30242"
 msgid "Set Scraper Sort Order to default"
@@ -1574,43 +1574,43 @@ msgstr "Razvrstaj izvore"
 
 msgctxt "#30594"
 msgid "1st Sort Key"
-msgstr "1. ključ razvrstavanja"
+msgstr "1. pravilo razvrstavanja"
 
 msgctxt "#30595"
 msgid "1st Sort Key Order"
-msgstr "1. redoslijed ključa razvrstavanja"
+msgstr "1. redoslijed pravila razvrstavanja"
 
 msgctxt "#30596"
 msgid "2nd Sort Key"
-msgstr "2. ključ sortiranja"
+msgstr "2. pravilo razvrstavanja"
 
 msgctxt "#30597"
 msgid "2nd Sort Key Order"
-msgstr "2. redoslijed ključa razvrstavanja"
+msgstr "2. redoslijed pravila razvrstavanja"
 
 msgctxt "#30598"
 msgid "3rd Sort Key"
-msgstr "3. ključ razvrstavanja"
+msgstr "3. pravilo razvrstavanja"
 
 msgctxt "#30599"
 msgid "3rd Sort Key Order"
-msgstr "3. redoslijed ključa razvrstavanja"
+msgstr "3. redoslijed pravila razvrstavanja"
 
 msgctxt "#30600"
 msgid "4th Sort Key"
-msgstr "4. ključ razvrstavanja"
+msgstr "4. pravilo razvrstavanja"
 
 msgctxt "#30601"
 msgid "4th Sort Key Order"
-msgstr "4. redoslijed ključa razvrstavanja"
+msgstr "4. redoslijed pravila razvrstavanja"
 
 msgctxt "#30602"
 msgid "5th Sort Key"
-msgstr "5. ključ razvrstavanja"
+msgstr "5. pravilo razvrstavanja"
 
 msgctxt "#30603"
 msgid "5th Sort Key Order"
-msgstr "5. redoslijed ključa razvrstavanja"
+msgstr "5. redoslijed pravila razvrstavanja"
 
 msgctxt "#30604"
 msgid "None"
@@ -1726,7 +1726,7 @@ msgstr "Vrati izvornu Death Streams bazu podataka ([COLOR red]Samo SQLITE[/COLOR
 
 msgctxt "#30632"
 msgid "Export data from Death Streams DB"
-msgstr "Izvezi podatke iz Death Streams bazu podataka"
+msgstr "Izvezi podatke iz Death Streams baze podataka"
 
 msgctxt "#30633"
 msgid "Import data into Death Streams DB"
@@ -1810,11 +1810,11 @@ msgstr "Prikaži Debrid podržane izvore u ..."
 
 msgctxt "#30653"
 msgid "6th Sort Key"
-msgstr "6. ključ razvrstavanja"
+msgstr "6. pravilo razvrstavanja"
 
 msgctxt "#30654"
 msgid "6th Sort Key Order"
-msgstr "6. Redoslijed ključa razvrstavanja"
+msgstr "6. redoslijed pravila razvrstavanja"
 
 msgctxt "#30655"
 msgid "Debrid"
