@@ -29,7 +29,7 @@ import scraper
 VIDEO_URL = '/video_info/iframe'
 
 class Scraper(scraper.Scraper):
-    OPTIONS = ['https://xmovies8.ru', 'https://putlockerhd.co', 'http://afdah.to', 'https://watch32movies.co']
+    OPTIONS = ['https://xmovies8.es', 'https://putlockerhd.co', 'http://afdah.to', 'https://watch32movies.co']
     
     def __init__(self, timeout=scraper.DEFAULT_TIMEOUT):
         self.timeout = timeout
