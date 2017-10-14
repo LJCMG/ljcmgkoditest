@@ -28,7 +28,7 @@ from salts_lib.constants import Q_ORDER
 import scraper
 
 logger = log_utils.Logger.get_logger(__name__)
-BASE_URL = 'http://www.ddlseries.pw/'
+BASE_URL = 'http://www.ddlseries.pw'
 QUALITY_MAP = {'SD-XVID': QUALITIES.MEDIUM, 'DVD9': QUALITIES.HIGH, 'SD-X264': QUALITIES.HIGH,
                'HD-720P': QUALITIES.HD720, 'HD-1080P': QUALITIES.HD1080, '720P': QUALITIES.HD720, 'XVID': QUALITIES.MEDIUM,
                'X264': QUALITIES.HIGH, '1080P': QUALITIES.HD1080}
