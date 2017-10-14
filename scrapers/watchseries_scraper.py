@@ -1,6 +1,6 @@
 """
-    SALTS XBMC Addon
-    Copyright (C) 2014 tknorris
+    Death Streams Addon
+    Copyright (C) 2017 Mr.Blamo
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ from salts_lib.constants import VIDEO_TYPES
 from salts_lib.constants import XHR
 import scraper
 
-BASE_URL = 'https://seriesfree.to/'
+BASE_URL = 'https://seriesfree.to'
 
 class Scraper(scraper.Scraper):
     base_url = BASE_URL
