@@ -48,7 +48,7 @@ msgstr "Poredak izvora"
 
 msgctxt "#30006"
 msgid "Url Resolver Settings"
-msgstr "Postavke Url razrješitelja"
+msgstr "Postavke URL razrješitelja"
 
 msgctxt "#30007"
 msgid "Add-on Settings"
